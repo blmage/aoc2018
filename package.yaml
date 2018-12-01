@@ -1,0 +1,33 @@
+name:                aoc2018
+version:             0.1.0
+github:              "blmage/aoc2018"
+author:              "blmage"
+
+extra-source-files:
+- README.md
+
+description:         Advent of Code 2018.
+
+dependencies:
+- base >= 4.7 && < 5
+- conduit
+- containers
+- safe
+- text
+
+default-extensions:
+- OverloadedStrings
+
+library:
+  source-dirs: src
+
+executables:
+  aoc2018-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aoc2018
