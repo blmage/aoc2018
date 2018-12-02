@@ -1,6 +1,3 @@
-{-# LANGUAGE MultiWayIf   #-}
-{-# LANGUAGE ViewPatterns #-}
-
 module Day01 where
 
 import           Conduit
@@ -11,28 +8,26 @@ import qualified Data.Text     as T
 import           Safe          (readMay)
 import           System.IO     (FilePath)
 
+import           Utils         (fileLines)
 
-fileFrequencyShifts :: MonadResource m => FilePath -> ConduitT a Int m ()
-fileFrequencyShifts path =
-       sourceFile path
-    .| decodeUtf8LenientC
-    .| linesUnboundedC
-    .| mapC (fromMaybe 0 . parseFrequency)
+
+fileFrequencyShifts :: MonadResource m => FilePath -> ConduitT i Int m ()
+fileFrequencyShifts path = fileLines path .| mapC (fromMaybe 0 . parseFrequency)
   where
     parseFrequency = T.uncons >=> \(sign, T.unpack -> n) -> if
         | sign == '+' -> readMay n
         | sign == '-' -> negate <$> readMay n
         | otherwise   -> Nothing
 
-fileFrequency :: MonadResource m => FilePath -> ConduitT a Void m Int
+fileFrequency :: MonadResource m => FilePath -> ConduitT i Void m Int
 fileFrequency path = fileFrequencyShifts path .| sumC
 
-fileFrequencies :: MonadResource m => FilePath -> ConduitT a Int m ()
+fileFrequencies :: MonadResource m => FilePath -> ConduitT i Int m ()
 fileFrequencies path = do
     shifts <- fileFrequencyShifts path .| sinkList
     yieldMany (cycle shifts) .| scanlC (+) 0 .| (dropC 1 >> mapC id)
 
-fileDuplicateFrequencies :: MonadResource m => FilePath -> ConduitT a Int m ()
+fileDuplicateFrequencies :: MonadResource m => FilePath -> ConduitT i Int m ()
 fileDuplicateFrequencies path =
     fileFrequencies path .| void (mapAccumWhileC go IS.empty) .| concatC
   where

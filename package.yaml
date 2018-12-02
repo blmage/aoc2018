@@ -1,5 +1,5 @@
 name:                aoc2018
-version:             0.1.0
+version:             0.2.0
 github:              "blmage/aoc2018"
 author:              "blmage"
 
@@ -12,11 +12,17 @@ dependencies:
 - base >= 4.7 && < 5
 - conduit
 - containers
+- mtl
 - safe
 - text
 
 default-extensions:
+- LambdaCase
+- MultiWayIf
 - OverloadedStrings
+- PatternGuards
+- TypeApplications
+- ViewPatterns
 
 library:
   source-dirs: src
