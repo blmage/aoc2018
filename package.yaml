@@ -1,5 +1,5 @@
 name:                aoc2018
-version:             0.2.0
+version:             0.3.0
 github:              "blmage/aoc2018"
 author:              "blmage"
 
@@ -12,15 +12,18 @@ dependencies:
 - base >= 4.7 && < 5
 - conduit
 - containers
+- microlens-platform
 - mtl
 - safe
 - text
+- trifecta
 
 default-extensions:
 - LambdaCase
 - MultiWayIf
 - OverloadedStrings
 - PatternGuards
+- RecordWildCards
 - TypeApplications
 - ViewPatterns
 

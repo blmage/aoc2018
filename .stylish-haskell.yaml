@@ -23,5 +23,6 @@ language_extensions:
 - MultiWayIf
 - OverloadedStrings
 - PatternGuards
+- RecordWildCards
 - TypeApplications
 - ViewPatterns
