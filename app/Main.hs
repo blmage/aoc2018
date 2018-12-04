@@ -3,6 +3,7 @@ module Main where
 import qualified Day01
 import qualified Day02
 import qualified Day03
+import qualified Day04
 
 
 printFailable :: Show a => Either String a -> IO ()
@@ -20,3 +21,6 @@ main = do
     putStrLn "Day 03:"
     putStr "* Answer 1: " *> Day03.answer1 >>= printFailable
     putStr "* Answer 2: " *> Day03.answer2 >>= printFailable
+    putStrLn "Day 04:"
+    putStr "* Answer 1: " *> Day04.answer1 >>= printFailable
+    putStr "* Answer 2: " *> Day04.answer2 >>= printFailable

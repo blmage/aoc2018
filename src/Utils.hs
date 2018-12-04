@@ -1,14 +1,17 @@
+{-# LANGUAGE RankNTypes #-}
+
 module Utils
     (
-      -- Mapping
+      -- * Mapping
       both
+    , first3
 
-      -- Conduit
+      -- * Conduit
     , fileLines
     , numberSource
     , runConduitResExcept
 
-      -- Trifecta
+      -- * Trifecta
     , int
     , sepByPair
     , commaSepPair
@@ -21,7 +24,9 @@ import           Control.Applicative  (Applicative, liftA2)
 import           Control.Monad.Except (ExceptT, runExceptT)
 import           Control.Monad.State  (get, put)
 import           Data.Bifunctor       (Bifunctor, bimap)
+import           Data.Semigroup       ((<>))
 import qualified Data.Text            as T
+import           Data.Time.Clock
 import           System.IO            (FilePath)
 import           Text.Trifecta
 import qualified Text.Trifecta.Delta  as Trifecta
@@ -29,6 +34,9 @@ import qualified Text.Trifecta.Delta  as Trifecta
 
 both :: Bifunctor f => (a -> b) -> f a a -> f b b
 both f = bimap f f
+
+first3 :: (a -> d) -> (a, b, c) -> (d, b, c)
+first3 f (x, y, z) = (f x, y, z)
 
 
 fileLines :: MonadResource m => FilePath -> ConduitT i T.Text m ()
@@ -49,7 +57,7 @@ runConduitResExcept = runResourceT . runExceptT . runConduit
 
 
 int :: TokenParsing m => m Int
-int = fromInteger <$> integer
+int = fromInteger <$> decimal
 
 sepByPair :: Applicative m => m a -> m sep -> m (a, a)
 sepByPair p sep = liftA2 (,) p (sep *> p)

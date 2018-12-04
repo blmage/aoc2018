@@ -17,8 +17,8 @@ import           Utils
 
 
 data Position = Position
-    { _x :: Int
-    , _y :: Int
+    { _x :: !Int
+    , _y :: !Int
     }
     deriving (Eq, Show)
 
@@ -26,8 +26,8 @@ makeLenses ''Position
 
 
 data Size = Size
-    { _w :: Int
-    , _h :: Int
+    { _w :: !Int
+    , _h :: !Int
     }
     deriving (Eq, Show)
 
@@ -35,9 +35,9 @@ makeLenses ''Size
 
 
 data Claim = Claim
-    { _claimId  :: Int
-    , _position :: Position
-    , _size     :: Size
+    { _claimId  :: !Int
+    , _position :: !Position
+    , _size     :: !Size
     }
     deriving (Eq, Show)
 
