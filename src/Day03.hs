@@ -57,11 +57,11 @@ guessFabricSize = foldr go (Size 0 0)
 
 claimParser :: Parser Claim
 claimParser = do
-    _claimId  <- token $ char '#' *> int
+    _claimId  <- token $ char '#' *> natInt
     _         <- symbolic '@'
-    _position <- uncurry Position <$> commaSepPair int
+    _position <- uncurry Position <$> commaSepPair natInt
     _         <- symbolic ':'
-    _size     <- uncurry Size <$> sepByPair int (char 'x')
+    _size     <- uncurry Size <$> sepByPair natInt (char 'x')
     pure Claim {..}
 
 claimPositions :: Claim -> [Position]

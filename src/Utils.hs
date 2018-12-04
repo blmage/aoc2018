@@ -12,7 +12,7 @@ module Utils
     , runConduitResExcept
 
       -- * Trifecta
-    , int
+    , natInt
     , sepByPair
     , commaSepPair
     , parseText
@@ -56,8 +56,8 @@ runConduitResExcept :: MonadUnliftIO m
 runConduitResExcept = runResourceT . runExceptT . runConduit
 
 
-int :: TokenParsing m => m Int
-int = fromInteger <$> decimal
+natInt :: TokenParsing m => m Int
+natInt = fromInteger <$> decimal
 
 sepByPair :: Applicative m => m a -> m sep -> m (a, a)
 sepByPair p sep = liftA2 (,) p (sep *> p)

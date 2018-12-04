@@ -48,8 +48,8 @@ makeLenses ''Shift
 dateParser :: Parser Day
 dateParser = do
     y <- natural
-    m <- char '-' *> int
-    d <- char '-' *> int
+    m <- char '-' *> natInt
+    d <- char '-' *> natInt
     maybe mzero pure $ fromGregorianValid y m d
 
 timeParser :: Parser DiffTime
@@ -64,7 +64,7 @@ eventTypeParser :: Parser EventType
 eventTypeParser =
         (text "wakes up"     *> pure WakeUp)
     <|> (text "falls asleep" *> pure FallAsleep)
-    <|> BeginShift <$> (text "Guard #" *> int <* text " begins shift")
+    <|> BeginShift <$> (text "Guard #" *> natInt <* text " begins shift")
 
 eventParser :: Parser Event
 eventParser =
