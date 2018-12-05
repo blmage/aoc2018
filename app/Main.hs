@@ -4,6 +4,7 @@ import qualified Day01
 import qualified Day02
 import qualified Day03
 import qualified Day04
+import qualified Day05
 
 
 printFailable :: Show a => Either String a -> IO ()
@@ -24,3 +25,6 @@ main = do
     putStrLn "Day 04:"
     putStr "* Answer 1: " *> Day04.answer1 >>= printFailable
     putStr "* Answer 2: " *> Day04.answer2 >>= printFailable
+    putStrLn "Day 05:"
+    putStr "* Answer 1: " *> Day05.answer1 >>= print
+    putStr "* Answer 2: " *> Day05.answer2 >>= print

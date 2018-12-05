@@ -13,7 +13,9 @@ dependencies:
 - conduit
 - containers
 - microlens-platform
+- monad-loops
 - mtl
+- pointedlist
 - safe
 - text
 - time
